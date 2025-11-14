@@ -48,25 +48,26 @@
 
     function moveDiverRandom(diver) {
         const sharkRect = getSharkRect();
-        let x, y, diverRect;
-
-        do {
-            x = Math.random() * (window.innerWidth - diver.offsetWidth);
-            y = Math.random() * (window.innerHeight - diver.offsetHeight);
-            diver.style.left = `${x}px`;
-            diver.style.top = `${y}px`;
-            diverRect = diver.getBoundingClientRect();
-        } while (
-            diverRect.left < sharkRect.right &&
-            diverRect.right > sharkRect.left &&
-            diverRect.top < sharkRect.bottom &&
-            diverRect.bottom > sharkRect.top
-        );
-    }
-
+    let x, y, diverRect;
+    let attempts = 0; // giới hạn vòng lặp
+    do {
+        x = Math.random() * (window.innerWidth - diver.offsetWidth);
+        y = Math.random() * (window.innerHeight - diver.offsetHeight);
+        diver.style.left = `${x}px`;
+        diver.style.top = `${y}px`;
+        diverRect = diver.getBoundingClientRect();
+        attempts++;
+        if (attempts > 20) break; // tránh vòng lặp vô tận
+    } while (
+        diverRect.left < sharkRect.right &&
+        diverRect.right > sharkRect.left &&
+        diverRect.top < sharkRect.bottom &&
+        diverRect.bottom > sharkRect.top
+    );
+}
     setInterval(() => {
         divers.forEach(diver => moveDiverRandom(diver));
-    }, 2500);
+    }, 10000);
 
     // --- Nhạc nền ---
     const btnMusic = document.getElementById('btnMusic');
