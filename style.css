@@ -26,9 +26,9 @@ body.aquarium {
 .diver {
     position: absolute;
     width: 160px;
-    /* Xóa animation cũ nếu dùng JS */
-    /* animation: diverSwim 4s ease-in-out infinite alternate; */
-    transition: left 2s ease, top 2s ease; /* mượt khi JS di chuyển */
+
+    /* Bây giờ dùng transition để di chuyển mượt */
+    transition: left 4s ease, top 4s ease; /* 4s là tốc độ bơi, có thể chỉnh */
 }
 
 /* ---------- Cá mập ---------- */
