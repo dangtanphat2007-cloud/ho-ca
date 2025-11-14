@@ -88,19 +88,34 @@ body.aquarium {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    pointer-events: none; /* không chặn chuột */
 }
 
 .bubble {
     position: absolute;
-    bottom: -50px;
+    bottom: -50px; /* bắt đầu dưới đáy */
+    width: 15px;   /* kích thước bong bóng */
+    height: 15px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.8);
-    animation: bubbleUp 6s linear infinite;
+    background: rgba(255,255,255,0.7);
+    opacity: 0.8;
+    animation: bubbleUp linear infinite;
 }
 
+/* Bong bóng nổi lên */
 @keyframes bubbleUp {
-    from { transform: translateY(0); opacity: 1; }
-    to   { transform: translateY(-120vh); opacity: 0; }
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-50vh) scale(1.2);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100vh) scale(1);
+        opacity: 0;
+    }
 }
 /* =======================
    TRANG INDEX (main-page)
