@@ -26,16 +26,9 @@ body.aquarium {
 .diver {
     position: absolute;
     width: 160px;
-    animation: diverSwim 4s ease-in-out infinite alternate;
-}
-
-.diver1 { left: 80px; top: 30%; animation-duration: 5s; }
-.diver2 { left: 140px; top: 50%; animation-duration: 4s; }
-.diver3 { left: 100px; top: 70%; animation-duration: 6s; }
-
-@keyframes diverSwim {
-    from { transform: translateY(-30px); }
-    to   { transform: translateY(30px); }
+    /* Xóa animation cũ nếu dùng JS */
+    /* animation: diverSwim 4s ease-in-out infinite alternate; */
+    transition: left 2s ease, top 2s ease; /* mượt khi JS di chuyển */
 }
 
 /* ---------- Cá mập ---------- */
