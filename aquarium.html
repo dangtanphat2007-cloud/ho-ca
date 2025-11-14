@@ -5,7 +5,6 @@
     <title>Hồ cá vui nhộn</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body class="aquarium" id="aquarium">
 
     <!-- Các nút chức năng -->
@@ -32,10 +31,66 @@
     <!-- Bong bóng -->
     <div id="bubbles"></div>
 
+    <!-- Nhạc nền -->
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="script.js"></script>
+    <!-- ---------- JavaScript trực tiếp ---------- -->
+    <script>
+    // --- Thợ lặn tránh cá mập ---
+    const shark = document.querySelector('.shark');
+    const divers = document.querySelectorAll('.diver');
+
+    function getSharkRect() {
+        return shark.getBoundingClientRect();
+    }
+
+    function moveDiverRandom(diver) {
+        const sharkRect = getSharkRect();
+        let x, y, diverRect;
+
+        do {
+            x = Math.random() * (window.innerWidth - diver.offsetWidth);
+            y = Math.random() * (window.innerHeight - diver.offsetHeight);
+            diver.style.left = `${x}px`;
+            diver.style.top = `${y}px`;
+            diverRect = diver.getBoundingClientRect();
+        } while (
+            diverRect.left < sharkRect.right &&
+            diverRect.right > sharkRect.left &&
+            diverRect.top < sharkRect.bottom &&
+            diverRect.bottom > sharkRect.top
+        );
+    }
+
+    setInterval(() => {
+        divers.forEach(diver => moveDiverRandom(diver));
+    }, 2500);
+
+    // --- Nhạc nền ---
+    const btnMusic = document.getElementById('btnMusic');
+    const bgMusic = document.getElementById('bgMusic');
+
+    btnMusic.addEventListener('click', () => {
+        if(bgMusic.paused) bgMusic.play();
+        else bgMusic.pause();
+    });
+
+    // --- Đổi nền ---
+    const btnBG = document.getElementById('btnBG');
+    const aquarium = document.getElementById('aquarium');
+
+    const backgrounds = ['images/bg1.jpg','images/bg2.jpg','images/bg3.jpg'];
+    let current = 0;
+
+    btnBG.addEventListener('click', () => {
+        current = (current + 1) % backgrounds.length;
+        aquarium.style.background = `url('${backgrounds[current]}')`;
+        aquarium.style.backgroundSize = 'cover';
+        aquarium.style.backgroundPosition = 'center';
+    });
+    </script>
+
 </body>
 </html>
