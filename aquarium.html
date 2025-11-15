@@ -11,7 +11,7 @@
     <div class="controls">
         <button id="btnMusic">🎵 Bật/Tắt nhạc</button>
         <button id="btnBG">🖼 Đổi cảnh nền</button>
-        
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
     </div>
 
     <!-- 3 thợ lặn -->
@@ -73,6 +73,13 @@
     // --- Nhạc nền ---
     const btnMusic = document.getElementById('btnMusic');
     const bgMusic = document.getElementById('bgMusic');
+    // THAY ĐỔI ÂM LƯỢNG
+    const volumeSlider = document.getElementById('volumeSlider');
+    bgMusic.volume = 0.5;
+
+    volumeSlider.addEventListener('input', () => {
+    bgMusic.volume = volumeSlider.value;
+    });
     
 
     btnMusic.addEventListener('click', () => {
